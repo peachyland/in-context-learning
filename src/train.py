@@ -19,24 +19,25 @@ import wandb
 torch.backends.cudnn.benchmark = True
 
 
-# def train_step(model, xs, ys, optimizer, loss_func):
-#     optimizer.zero_grad()
-#     ys_train = ys.clone()
-#     output = model(xs,ys_train)
-#     loss = loss_func(output[:,-1], ys_train[:,-1])
-#     loss.backward()
-#     optimizer.step()
-#     return loss.detach().item(), output.detach()
 def train_step(model, xs, ys, optimizer, loss_func):
     optimizer.zero_grad()
-    loss = 0
-    for i in range(xs.shape[1]):
-        ys_train = ys[:,:i+1].clone()
-        output = model(xs[:,:i+1],ys_train)
-        loss += loss_func(output[:,-1], ys_train[:,-1])
+    ys_train = ys.clone()
+    output = model(xs,ys_train)
+    loss = loss_func(output[:,-1], ys_train[:,-1])
     loss.backward()
     optimizer.step()
     return loss.detach().item(), output.detach()
+
+# def train_step(model, xs, ys, optimizer, loss_func):
+#     optimizer.zero_grad()
+#     loss = 0
+#     for i in range(xs.shape[1]):
+#         ys_train = ys[:,:i+1].clone()
+#         output = model(xs[:,:i+1],ys_train)
+#         loss += loss_func(output[:,-1], ys_train[:,-1])
+#     loss.backward()
+#     optimizer.step()
+#     return loss.detach().item(), output.detach()
 
 def sample_seeds(total_seeds, count):
     seeds = set()
