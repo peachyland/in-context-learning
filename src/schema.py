@@ -12,6 +12,9 @@ from quinine import (
 )
 from funcy import merge
 
+# print(tstring)
+# import pdb ; pdb.set_trace()
+
 
 model_schema = {
     "family": merge(tstring, allowed(["gpt2", "lstm"])),
@@ -20,6 +23,7 @@ model_schema = {
     "n_embd": merge(tinteger, required),
     "n_layer": merge(tinteger, required),
     "n_head": merge(tinteger, required),
+    "flag_read_in": merge(tboolean, required),
 }
 
 curriculum_base_schema = {

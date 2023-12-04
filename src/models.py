@@ -20,6 +20,7 @@ def build_model(conf):
             n_embd=conf.n_embd,
             n_layer=conf.n_layer,
             n_head=conf.n_head,
+            flag_read_in=conf.flag_read_in,
         )
     else:
         raise NotImplementedError
@@ -79,8 +80,10 @@ def get_relevant_baselines(task_name):
 
 
 class TransformerModel(nn.Module):
-    def __init__(self, n_dims, n_positions, n_embd=128, n_layer=12, n_head=4):
+    def __init__(self, n_dims, n_positions, n_embd=128, n_layer=12, n_head=4, flag_read_in=True):
         super(TransformerModel, self).__init__()
+        if not flag_read_in:
+            n_embd = n_dims+1
         configuration = GPT2Config(
             n_positions=2 * n_positions,
             n_embd=n_embd,
@@ -92,10 +95,13 @@ class TransformerModel(nn.Module):
             use_cache=False,
         )
         self.name = f"gpt2_embd={n_embd}_layer={n_layer}_head={n_head}"
+        self.flag_read_in = flag_read_in
 
         self.n_positions = n_positions
         self.n_dims = n_dims
-        self._read_in = nn.Linear(n_dims+1, n_embd) 
+        # import pdb ; pdb.set_trace()
+        if flag_read_in:
+            self._read_in = nn.Linear(n_dims+1, n_embd) 
         self._backbone = GPT2Model(configuration)
         self._read_out = nn.Linear(n_embd, 1)
 
@@ -150,10 +156,14 @@ class TransformerModel(nn.Module):
             if max(inds) >= ys.shape[1] or min(inds) < 0:
                 raise ValueError("inds contain indices where xs and ys are not defined")
         zs = self._combine3(xs, ys)
-       #zs = self._combine4(xs, ys,inds)
-        embeds = self._read_in(zs)
+        #zs = self._combine4(xs, ys,inds)
+        if self.flag_read_in:
+            embeds = self._read_in(zs)
+        else:
+            embeds = zs
         output = self._backbone(inputs_embeds=embeds).last_hidden_state
         prediction = self._read_out(output)
+
         return prediction[:, :, 0][:, inds]  # predict only on xs
             
 

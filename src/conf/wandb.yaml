@@ -1,5 +1,5 @@
 wandb:
     project: in-context-training
-    entity: cuiyingq
+    entity: thu15renjie
     notes:
     log_every_steps: 100
