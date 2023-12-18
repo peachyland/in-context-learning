@@ -67,6 +67,8 @@ def train(model, args):
         n_dims,
         bsize,
         num_tasks=args.training.num_tasks,
+        w_b_save_path=os.path.join(args.out_dir, "theta0.pt"),
+        flag_save_w_b=True,
         **args.training.task_kwargs,
     )
     pbar = tqdm(range(starting_step, args.training.train_steps))
@@ -182,7 +184,7 @@ if __name__ == "__main__":
         if run_id is None:
             run_id = str(uuid.uuid4())
 
-        out_dir = os.path.join(args.out_dir, run_id)
+        out_dir = os.path.join(args.out_dir, f"jobid{args.job_id}_embd{args.model.n_embd}_layer{args.model.n_layer}_head{args.model.n_head}_read_in{args.model.flag_read_in}_{run_id}")
         if not os.path.exists(out_dir):
             os.makedirs(out_dir)
         args.out_dir = out_dir

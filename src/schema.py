@@ -75,4 +75,5 @@ schema = {
     "training": stdict(training_schema),
     "wandb": stdict(wandb_schema),
     "test_run": merge(tboolean, default(False)),
+    "job_id": merge(tstring, default("local")),
 }

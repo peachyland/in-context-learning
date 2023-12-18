@@ -43,6 +43,9 @@ relevant_model_names = {
 def basic_plot(metrics, models=None, trivial=1.0):
     fig, ax = plt.subplots(1, 1)
 
+    # print(metrics.keys())
+    # print(models)
+    # input("check")
     if models is not None:
         metrics = {k: metrics[k] for k in models}
 
@@ -78,6 +81,9 @@ def collect_results(run_dir, df, valid_row=None, rename_eval=None, rename_model=
 
         metrics = get_run_metrics(run_path, skip_model_load=False)
 
+        # print(metrics)
+        # input("check")
+
         for eval_name, results in sorted(metrics.items()):
             processed_results = {}
             for model_name, m in results.items():
@@ -111,5 +117,7 @@ def collect_results(run_dir, df, valid_row=None, rename_eval=None, rename_model=
             if eval_name not in all_metrics:
                 all_metrics[eval_name] = {}
             all_metrics[eval_name].update(processed_results)
+    # print(all_metrics.keys())
+    # input("check")
     return all_metrics
 

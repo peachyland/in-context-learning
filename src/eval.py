@@ -27,7 +27,9 @@ def get_model_from_run(run_path, step=-1, only_conf=False):
         state_path = os.path.join(run_path, "state.pt")
         state = torch.load(state_path)
         #state["model_state_dict"]["_backbone.h.0.attn.masked_bias"] = torch.tensor(-1e4)  # or whatever value you need
-        model.load_state_dict(state["model_state_dict"])
+        # state["model_state_dict"]["_backbone.h.0.attn.bias"] = torch.tensor(-1e4)
+        print("cjhecl")
+        model.load_state_dict(state["model_state_dict"], strict=False)
     else:
         model_path = os.path.join(run_path, f"model_{step}.pt")
         state_dict = torch.load(model_path)
@@ -69,7 +71,7 @@ def eval_batch(model, task_sampler, xs, xs_p=None):
             ys_pred = ys.clone()
             pred = model(xs_comb[:,:i+1].to(device), ys_pred[:,:i+1].to(device), inds=[i]).detach()
             pred = pred.squeeze()
-            metrics[:, i] = task.get_metric()(pred.cpu(), ys_pred[:,i])
+            metrics[:, i] = task.get_metric()(pred.to(ys_pred.device), ys_pred[:,i])
     else:
         b_size, n_points, _ = xs.shape
         metrics = torch.zeros(b_size, n_points)
@@ -78,7 +80,7 @@ def eval_batch(model, task_sampler, xs, xs_p=None):
             ys = task.evaluate(xs_comb)
 
             pred = model(xs_comb.to(device), ys.to(device), inds=[i]).detach()
-            metrics[:, i] = task.get_metric()(pred.cpu(), ys)[:, i]
+            metrics[:, i] = task.get_metric()(pred.to(ys.device), ys)[:, i]
 
     return metrics
 
@@ -104,7 +106,7 @@ def gen_opposite_quadrants(data_sampler, n_points, b_size):
 
 def gen_random_quadrants(data_sampler, n_points, b_size):
     xs = data_sampler.sample_xs(n_points, b_size)
-    pattern = torch.randn([b_size, 1, xs.shape[2]]).sign()
+    pattern = torch.randn([b_size, 1, xs.shape[2]], device='cuda:0').sign()
 
     xs_train_pre = xs.abs() * pattern
     xs_test_post = xs
@@ -145,7 +147,7 @@ def gen_overlapping_train_test(data_sampler, n_points, b_size):
     b_size = xs.shape[0]
     for i in range(1, n_points):
         xs_train_pre_i = xs[:, :i, :]
-        perm = torch.stack([torch.randperm(i) for _ in range(b_size)]).unsqueeze(dim=1)
+        perm = torch.stack([torch.randperm(i, device=xs.device) for _ in range(b_size)]).unsqueeze(dim=1)
         ind_mat = (perm == 0) + 0.0
         xs_test_post[:, i : i + 1, :] = ind_mat @ xs_train_pre_i
 
@@ -200,7 +202,11 @@ def eval_model(
 
     generating_func = globals()[f"gen_{prompting_strategy}"]
     for i in range(num_eval_examples // batch_size):
+        # import pdb ; pdb.set_trace()
         xs, xs_p = generating_func(data_sampler, n_points, batch_size)
+
+        if xs_p != None:
+            xs_p = xs_p.to(xs.device)
 
         metrics = eval_batch(model, task_sampler, xs, xs_p)
         all_metrics.append(metrics)
@@ -340,24 +346,27 @@ def get_run_metrics(
 
 def conf_to_model_name(conf):
     if conf.model.family == "gpt2":
-        return {
-            (3, 2): "Transformer-xs",
-            (6, 4): "Transformer-small",
-            (12, 8): "Transformer",
-            (1, 8): "Transformer-1-layer",
-            (1, 1): "Transformer-1-layer-1-head",
-            (1, 4): "Transformer-1-layer-4-head",
-            (1, 16): "Transformer-1-layer-16-head",
-            (1, 32): "Transformer-1-layer-32-head",
-            (1, 2): "Transformer-1-layer-2-head",
-            (1, 64): "Transformer-1-layer-64-head",
-            (1, 128): "Transformer-1-layer-128-head",
-            (2, 8): "Transformer-2-layer-8-head",
-            (1, 256): "Transformer-1-layer-256-head",
-            (3, 1): "Transformer-2-layer-1-head",
-            (2, 16):"Transformer-2-layer-16-head",
-            (4, 8): "Transformer-4-layer-8-head",
-        }[(conf.model.n_layer, conf.model.n_head)]
+        try:
+            return {
+                (3, 2): "Transformer-xs",
+                (6, 4): "Transformer-small",
+                (12, 8): "Transformer",
+                (1, 8): "Transformer-1-layer",
+                (1, 1): "Transformer-1-layer-1-head",
+                (1, 4): "Transformer-1-layer-4-head",
+                (1, 16): "Transformer-1-layer-16-head",
+                (1, 32): "Transformer-1-layer-32-head",
+                (1, 2): "Transformer-1-layer-2-head",
+                (1, 64): "Transformer-1-layer-64-head",
+                (1, 128): "Transformer-1-layer-128-head",
+                (2, 8): "Transformer-2-layer-8-head",
+                (1, 256): "Transformer-1-layer-256-head",
+                (3, 1): "Transformer-2-layer-1-head",
+                (2, 16):"Transformer-2-layer-16-head",
+                (4, 8): "Transformer-4-layer-8-head",
+            }[(conf.model.n_layer, conf.model.n_head)]
+        except:
+            return f"Transformer-{conf.model.n_layer}-layer-{conf.model.n_head}-head"
     else:
         return conf.wandb.name
 

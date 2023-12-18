@@ -2,3 +2,6 @@
 __pycache__
 models.zip
 models
+logfile/
+cmd/
+plot_results/
