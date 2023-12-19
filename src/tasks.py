@@ -74,35 +74,32 @@ def get_task_sampler(
 
 
 class LinearRegression(Task):
-    def __init__(self, n_dims, batch_size, pool_dict=None, seeds=None, scale=1, w_b_save_path="theta0.pt", flag_save_w_b=False, flag_load_w_b=False):
+    def __init__(self, n_dims, batch_size, pool_dict=None, seeds=None, scale=1, w_b_save_path="./theta0.pt", flag_load_w_b=False, sigma=1):
         """scale: a constant by which to scale the randomly sampled weights."""
         super(LinearRegression, self).__init__(n_dims, batch_size, pool_dict, seeds)
         self.scale = scale
 
-        # flag_load_w_b = True
-        # w_b_save_path = "/egr/research-dselab/renjie3/renjie/LLM/multi_head/in-context-learning/models/linear_regression/jobid51_embd64_layer1_head16_read_inTrue_ee7e16c5-d0f9-4404-9f58-4f0e453d91e7/theta0.pt"
+        if pool_dict is None and seeds is None:
+            self.w_b = torch.randn(self.b_size, self.n_dims, 1)
+        elif seeds is not None:
+            self.w_b = torch.zeros(self.b_size, self.n_dims, 1)
+            generator = torch.Generator()
+            assert len(seeds) == self.b_size
+            for i, seed in enumerate(seeds):
+                generator.manual_seed(seed)
+                self.w_b[i] = torch.randn(self.n_dims, 1, generator=generator)
+        else:
+            assert "w" in pool_dict
+            indices = torch.randperm(len(pool_dict["w"]))[:batch_size]
+            self.w_b = pool_dict["w"][indices]
+
+        # print("sigma", sigma)
+        # import pdb ; pdb.set_trace()
 
         if flag_load_w_b:
-            self.w_b = torch.load(w_b_save_path)
-            print(f"Theta is loaded from {w_b_save_path}")
-        else:
-            if pool_dict is None and seeds is None:
-                self.w_b = torch.randn(self.b_size, self.n_dims, 1)
-            elif seeds is not None:
-                self.w_b = torch.zeros(self.b_size, self.n_dims, 1)
-                generator = torch.Generator()
-                assert len(seeds) == self.b_size
-                for i, seed in enumerate(seeds):
-                    generator.manual_seed(seed)
-                    self.w_b[i] = torch.randn(self.n_dims, 1, generator=generator)
-            else:
-                assert "w" in pool_dict
-                indices = torch.randperm(len(pool_dict["w"]))[:batch_size]
-                self.w_b = pool_dict["w"][indices]
-
-            if flag_save_w_b:
-                torch.save(self.w_b, w_b_save_path)
-                print(f"Theta is saved at {w_b_save_path}")
+            self.theta_0 = torch.load(w_b_save_path) / sigma
+            self.w_b += self.theta_0
+            # print(f"Theta0 is loaded from {w_b_save_path}")
 
     def evaluate(self, xs_b):
         w_b = self.w_b.to(xs_b.device)

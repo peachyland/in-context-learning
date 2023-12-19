@@ -24,6 +24,9 @@ model_schema = {
     "n_layer": merge(tinteger, required),
     "n_head": merge(tinteger, required),
     "flag_read_in": merge(tboolean, required),
+    "activation_function": merge(tstring, required),
+    "sigma": merge(tfloat, required),
+    "flag_load_w_b": merge(tboolean, default(False)),
 }
 
 curriculum_base_schema = {

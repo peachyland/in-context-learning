@@ -59,6 +59,8 @@ def train(model, args):
         for i in range(state["train_step"] + 1):
             curriculum.update()
 
+    # import pdb ; pdb.set_trace()
+
     n_dims = model.n_dims
     bsize = args.training.batch_size
     data_sampler = get_data_sampler(args.training.data, n_dims=n_dims)
@@ -67,8 +69,9 @@ def train(model, args):
         n_dims,
         bsize,
         num_tasks=args.training.num_tasks,
-        w_b_save_path=os.path.join(args.out_dir, "theta0.pt"),
-        flag_save_w_b=True,
+        w_b_save_path="./theta0.pt",
+        flag_load_w_b=args.model.flag_load_w_b,
+        sigma=args.model.sigma,
         **args.training.task_kwargs,
     )
     pbar = tqdm(range(starting_step, args.training.train_steps))
@@ -184,7 +187,7 @@ if __name__ == "__main__":
         if run_id is None:
             run_id = str(uuid.uuid4())
 
-        out_dir = os.path.join(args.out_dir, f"jobid{args.job_id}_embd{args.model.n_embd}_layer{args.model.n_layer}_head{args.model.n_head}_read_in{args.model.flag_read_in}_{run_id}")
+        out_dir = os.path.join(args.out_dir, f"jobid{args.job_id}_embd{args.model.n_embd}_layer{args.model.n_layer}_head{args.model.n_head}_read_in{args.model.flag_read_in}_theta0{args.model.flag_load_w_b}_sigma{args.model.sigma}_{run_id}")
         if not os.path.exists(out_dir):
             os.makedirs(out_dir)
         args.out_dir = out_dir

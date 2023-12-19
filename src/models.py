@@ -21,6 +21,7 @@ def build_model(conf):
             n_layer=conf.n_layer,
             n_head=conf.n_head,
             flag_read_in=conf.flag_read_in,
+            activation_function=conf.activation_function,
         )
     else:
         raise NotImplementedError
@@ -80,7 +81,7 @@ def get_relevant_baselines(task_name):
 
 
 class TransformerModel(nn.Module):
-    def __init__(self, n_dims, n_positions, n_embd=128, n_layer=12, n_head=4, flag_read_in=True):
+    def __init__(self, n_dims, n_positions, n_embd=128, n_layer=12, n_head=4, flag_read_in=True, activation_function='gelu_new'):
         super(TransformerModel, self).__init__()
         if not flag_read_in:
             n_embd = n_dims+1
@@ -93,6 +94,7 @@ class TransformerModel(nn.Module):
             embd_pdrop=0.0,
             attn_pdrop=0.0,
             use_cache=False,
+            activation_function=activation_function,
         )
         self.name = f"gpt2_embd={n_embd}_layer={n_layer}_head={n_head}"
         self.flag_read_in = flag_read_in

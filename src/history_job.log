@@ -408,3 +408,689 @@ model:
     n_head: 1  # should be a factor of 6 if flag_read_in == False
     flag_read_in: True
 ---------------------------------------------------------------
+Mon Dec 18 03:45:33 PM EST 2023
+53
+GPU_ID=2
+python train.py --config conf/linear_regression.yaml
+model:
+    family: gpt2
+    n_embd: 6  # useless if flag_read_in == False
+    n_layer: 1
+    n_head: 1  # should be a factor of 6 if flag_read_in == False
+    flag_read_in: True
+---------------------------------------------------------------
+Mon Dec 18 03:45:39 PM EST 2023
+54
+GPU_ID=2
+python train.py --config conf/linear_regression.yaml
+model:
+    family: gpt2
+    n_embd: 6  # useless if flag_read_in == False
+    n_layer: 1
+    n_head: 1  # should be a factor of 6 if flag_read_in == False
+    flag_read_in: True
+---------------------------------------------------------------
+Mon Dec 18 03:45:39 PM EST 2023
+55
+GPU_ID=2
+python train.py --config conf/linear_regression.yaml
+model:
+    family: gpt2
+    n_embd: 6  # useless if flag_read_in == False
+    n_layer: 1
+    n_head: 1  # should be a factor of 6 if flag_read_in == False
+    flag_read_in: True
+---------------------------------------------------------------
+Mon Dec 18 03:45:40 PM EST 2023
+56
+GPU_ID=2
+python train.py --config conf/linear_regression.yaml
+model:
+    family: gpt2
+    n_embd: 6  # useless if flag_read_in == False
+    n_layer: 1
+    n_head: 1  # should be a factor of 6 if flag_read_in == False
+    flag_read_in: True
+---------------------------------------------------------------
+Mon Dec 18 03:45:40 PM EST 2023
+57
+GPU_ID=2
+python train.py --config conf/linear_regression.yaml
+model:
+    family: gpt2
+    n_embd: 6  # useless if flag_read_in == False
+    n_layer: 1
+    n_head: 1  # should be a factor of 6 if flag_read_in == False
+    flag_read_in: True
+---------------------------------------------------------------
+Mon Dec 18 03:45:41 PM EST 2023
+58
+GPU_ID=2
+python train.py --config conf/linear_regression.yaml
+model:
+    family: gpt2
+    n_embd: 6  # useless if flag_read_in == False
+    n_layer: 1
+    n_head: 1  # should be a factor of 6 if flag_read_in == False
+    flag_read_in: True
+---------------------------------------------------------------
+Mon Dec 18 03:45:41 PM EST 2023
+59
+GPU_ID=2
+python train.py --config conf/linear_regression.yaml
+model:
+    family: gpt2
+    n_embd: 6  # useless if flag_read_in == False
+    n_layer: 1
+    n_head: 1  # should be a factor of 6 if flag_read_in == False
+    flag_read_in: True
+---------------------------------------------------------------
+Mon Dec 18 03:45:42 PM EST 2023
+60
+GPU_ID=2
+python train.py --config conf/linear_regression.yaml
+model:
+    family: gpt2
+    n_embd: 6  # useless if flag_read_in == False
+    n_layer: 1
+    n_head: 1  # should be a factor of 6 if flag_read_in == False
+    flag_read_in: True
+---------------------------------------------------------------
+Mon Dec 18 03:45:42 PM EST 2023
+61
+GPU_ID=2
+python train.py --config conf/linear_regression.yaml
+model:
+    family: gpt2
+    n_embd: 6  # useless if flag_read_in == False
+    n_layer: 1
+    n_head: 1  # should be a factor of 6 if flag_read_in == False
+    flag_read_in: True
+---------------------------------------------------------------
+Mon Dec 18 03:45:43 PM EST 2023
+62
+GPU_ID=2
+python train.py --config conf/linear_regression.yaml
+model:
+    family: gpt2
+    n_embd: 6  # useless if flag_read_in == False
+    n_layer: 1
+    n_head: 1  # should be a factor of 6 if flag_read_in == False
+    flag_read_in: True
+---------------------------------------------------------------
+Mon Dec 18 03:45:59 PM EST 2023
+63
+GPU_ID=3
+python train.py --config conf/linear_regression.yaml
+model:
+    family: gpt2
+    n_embd: 6  # useless if flag_read_in == False
+    n_layer: 1
+    n_head: 1  # should be a factor of 6 if flag_read_in == False
+    flag_read_in: False
+---------------------------------------------------------------
+Mon Dec 18 03:45:59 PM EST 2023
+64
+GPU_ID=3
+python train.py --config conf/linear_regression.yaml
+model:
+    family: gpt2
+    n_embd: 6  # useless if flag_read_in == False
+    n_layer: 1
+    n_head: 1  # should be a factor of 6 if flag_read_in == False
+    flag_read_in: False
+---------------------------------------------------------------
+Mon Dec 18 03:46:00 PM EST 2023
+65
+GPU_ID=3
+python train.py --config conf/linear_regression.yaml
+model:
+    family: gpt2
+    n_embd: 6  # useless if flag_read_in == False
+    n_layer: 1
+    n_head: 1  # should be a factor of 6 if flag_read_in == False
+    flag_read_in: False
+---------------------------------------------------------------
+Mon Dec 18 03:46:01 PM EST 2023
+66
+GPU_ID=3
+python train.py --config conf/linear_regression.yaml
+model:
+    family: gpt2
+    n_embd: 6  # useless if flag_read_in == False
+    n_layer: 1
+    n_head: 1  # should be a factor of 6 if flag_read_in == False
+    flag_read_in: False
+---------------------------------------------------------------
+Mon Dec 18 03:46:01 PM EST 2023
+67
+GPU_ID=3
+python train.py --config conf/linear_regression.yaml
+model:
+    family: gpt2
+    n_embd: 6  # useless if flag_read_in == False
+    n_layer: 1
+    n_head: 1  # should be a factor of 6 if flag_read_in == False
+    flag_read_in: False
+---------------------------------------------------------------
+Mon Dec 18 03:46:02 PM EST 2023
+68
+GPU_ID=3
+python train.py --config conf/linear_regression.yaml
+model:
+    family: gpt2
+    n_embd: 6  # useless if flag_read_in == False
+    n_layer: 1
+    n_head: 1  # should be a factor of 6 if flag_read_in == False
+    flag_read_in: False
+---------------------------------------------------------------
+Mon Dec 18 03:46:03 PM EST 2023
+69
+GPU_ID=3
+python train.py --config conf/linear_regression.yaml
+model:
+    family: gpt2
+    n_embd: 6  # useless if flag_read_in == False
+    n_layer: 1
+    n_head: 1  # should be a factor of 6 if flag_read_in == False
+    flag_read_in: False
+---------------------------------------------------------------
+Mon Dec 18 03:46:03 PM EST 2023
+70
+GPU_ID=3
+python train.py --config conf/linear_regression.yaml
+model:
+    family: gpt2
+    n_embd: 6  # useless if flag_read_in == False
+    n_layer: 1
+    n_head: 1  # should be a factor of 6 if flag_read_in == False
+    flag_read_in: False
+---------------------------------------------------------------
+Mon Dec 18 03:46:04 PM EST 2023
+71
+GPU_ID=3
+python train.py --config conf/linear_regression.yaml
+model:
+    family: gpt2
+    n_embd: 6  # useless if flag_read_in == False
+    n_layer: 1
+    n_head: 1  # should be a factor of 6 if flag_read_in == False
+    flag_read_in: False
+---------------------------------------------------------------
+Mon Dec 18 03:46:05 PM EST 2023
+72
+GPU_ID=3
+python train.py --config conf/linear_regression.yaml
+model:
+    family: gpt2
+    n_embd: 6  # useless if flag_read_in == False
+    n_layer: 1
+    n_head: 1  # should be a factor of 6 if flag_read_in == False
+    flag_read_in: False
+---------------------------------------------------------------
+Mon Dec 18 04:30:08 PM EST 2023
+73
+GPU_ID=4
+python train.py --config conf/linear_regression.yaml
+model:
+    family: gpt2
+    n_embd: 64  # useless if flag_read_in == False
+    n_layer: 1
+    n_head: 1  # should be a factor of 6 if flag_read_in == False
+    flag_read_in: True
+    activation_function: linear # linear gelu_new
+---------------------------------------------------------------
+Mon Dec 18 04:31:02 PM EST 2023
+74
+GPU_ID=4
+python train.py --config conf/linear_regression.yaml
+model:
+    family: gpt2
+    n_embd: 64  # useless if flag_read_in == False
+    n_layer: 1
+    n_head: 1  # should be a factor of 6 if flag_read_in == False
+    flag_read_in: True
+    activation_function: linear # linear gelu_new
+---------------------------------------------------------------
+Mon Dec 18 04:31:04 PM EST 2023
+75
+GPU_ID=4
+python train.py --config conf/linear_regression.yaml
+model:
+    family: gpt2
+    n_embd: 64  # useless if flag_read_in == False
+    n_layer: 1
+    n_head: 1  # should be a factor of 6 if flag_read_in == False
+    flag_read_in: True
+    activation_function: linear # linear gelu_new
+---------------------------------------------------------------
+Mon Dec 18 04:31:41 PM EST 2023
+76
+GPU_ID=4
+python train.py --config conf/linear_regression.yaml
+model:
+    family: gpt2
+    n_embd: 6  # useless if flag_read_in == False
+    n_layer: 1
+    n_head: 1  # should be a factor of 6 if flag_read_in == False
+    flag_read_in: False
+    activation_function: linear # linear gelu_new
+---------------------------------------------------------------
+Mon Dec 18 04:31:43 PM EST 2023
+77
+GPU_ID=4
+python train.py --config conf/linear_regression.yaml
+model:
+    family: gpt2
+    n_embd: 6  # useless if flag_read_in == False
+    n_layer: 1
+    n_head: 1  # should be a factor of 6 if flag_read_in == False
+    flag_read_in: False
+    activation_function: linear # linear gelu_new
+---------------------------------------------------------------
+Mon Dec 18 04:31:44 PM EST 2023
+78
+GPU_ID=4
+python train.py --config conf/linear_regression.yaml
+model:
+    family: gpt2
+    n_embd: 6  # useless if flag_read_in == False
+    n_layer: 1
+    n_head: 1  # should be a factor of 6 if flag_read_in == False
+    flag_read_in: False
+    activation_function: linear # linear gelu_new
+---------------------------------------------------------------
+Mon Dec 18 04:40:45 PM EST 2023
+79
+GPU_ID=4
+python train.py --config conf/linear_regression.yaml
+model:
+    family: gpt2
+    n_embd: 6  # useless if flag_read_in == False
+    n_layer: 1
+    n_head: 1  # should be a factor of 6 if flag_read_in == False
+    flag_read_in: False
+    activation_function: linear # linear gelu_new
+---------------------------------------------------------------
+Mon Dec 18 04:40:46 PM EST 2023
+80
+GPU_ID=4
+python train.py --config conf/linear_regression.yaml
+model:
+    family: gpt2
+    n_embd: 6  # useless if flag_read_in == False
+    n_layer: 1
+    n_head: 1  # should be a factor of 6 if flag_read_in == False
+    flag_read_in: False
+    activation_function: linear # linear gelu_new
+---------------------------------------------------------------
+Mon Dec 18 04:40:47 PM EST 2023
+81
+GPU_ID=4
+python train.py --config conf/linear_regression.yaml
+model:
+    family: gpt2
+    n_embd: 6  # useless if flag_read_in == False
+    n_layer: 1
+    n_head: 1  # should be a factor of 6 if flag_read_in == False
+    flag_read_in: False
+    activation_function: linear # linear gelu_new
+---------------------------------------------------------------
+Mon Dec 18 04:41:04 PM EST 2023
+82
+GPU_ID=4
+python train.py --config conf/linear_regression.yaml
+model:
+    family: gpt2
+    n_embd: 64  # useless if flag_read_in == False
+    n_layer: 1
+    n_head: 1  # should be a factor of 6 if flag_read_in == False
+    flag_read_in: True
+    activation_function: linear # linear gelu_new
+---------------------------------------------------------------
+Mon Dec 18 04:41:05 PM EST 2023
+83
+GPU_ID=4
+python train.py --config conf/linear_regression.yaml
+model:
+    family: gpt2
+    n_embd: 64  # useless if flag_read_in == False
+    n_layer: 1
+    n_head: 1  # should be a factor of 6 if flag_read_in == False
+    flag_read_in: True
+    activation_function: linear # linear gelu_new
+---------------------------------------------------------------
+Mon Dec 18 04:41:06 PM EST 2023
+84
+GPU_ID=4
+python train.py --config conf/linear_regression.yaml
+model:
+    family: gpt2
+    n_embd: 64  # useless if flag_read_in == False
+    n_layer: 1
+    n_head: 1  # should be a factor of 6 if flag_read_in == False
+    flag_read_in: True
+    activation_function: linear # linear gelu_new
+---------------------------------------------------------------
+Mon Dec 18 08:20:00 PM EST 2023
+85
+GPU_ID=4
+python train.py --config conf/linear_regression.yaml
+model:
+    family: gpt2
+    n_embd: 64  # useless if flag_read_in == False
+    n_layer: 1
+    n_head: 1  # should be a factor of 6 if flag_read_in == False
+    flag_read_in: True
+    activation_function: gelu_new # linear gelu_new
+    sigma: 0.01
+    flag_load_w_b: True
+---------------------------------------------------------------
+Mon Dec 18 08:20:10 PM EST 2023
+86
+GPU_ID=4
+python train.py --config conf/linear_regression.yaml
+model:
+    family: gpt2
+    n_embd: 64  # useless if flag_read_in == False
+    n_layer: 1
+    n_head: 1  # should be a factor of 6 if flag_read_in == False
+    flag_read_in: True
+    activation_function: gelu_new # linear gelu_new
+    sigma: 0.05
+    flag_load_w_b: True
+---------------------------------------------------------------
+Mon Dec 18 08:20:18 PM EST 2023
+87
+GPU_ID=4
+python train.py --config conf/linear_regression.yaml
+model:
+    family: gpt2
+    n_embd: 64  # useless if flag_read_in == False
+    n_layer: 1
+    n_head: 1  # should be a factor of 6 if flag_read_in == False
+    flag_read_in: True
+    activation_function: gelu_new # linear gelu_new
+    sigma: 0.1
+    flag_load_w_b: True
+---------------------------------------------------------------
+Mon Dec 18 08:21:02 PM EST 2023
+88
+GPU_ID=4
+python train.py --config conf/linear_regression.yaml
+model:
+    family: gpt2
+    n_embd: 64  # useless if flag_read_in == False
+    n_layer: 1
+    n_head: 1  # should be a factor of 6 if flag_read_in == False
+    flag_read_in: True
+    activation_function: gelu_new # linear gelu_new
+    sigma: 0.2
+    flag_load_w_b: True
+---------------------------------------------------------------
+Mon Dec 18 08:21:11 PM EST 2023
+89
+GPU_ID=4
+python train.py --config conf/linear_regression.yaml
+model:
+    family: gpt2
+    n_embd: 64  # useless if flag_read_in == False
+    n_layer: 1
+    n_head: 1  # should be a factor of 6 if flag_read_in == False
+    flag_read_in: True
+    activation_function: gelu_new # linear gelu_new
+    sigma: 0.3
+    flag_load_w_b: True
+---------------------------------------------------------------
+Mon Dec 18 08:21:17 PM EST 2023
+90
+GPU_ID=4
+python train.py --config conf/linear_regression.yaml
+model:
+    family: gpt2
+    n_embd: 64  # useless if flag_read_in == False
+    n_layer: 1
+    n_head: 1  # should be a factor of 6 if flag_read_in == False
+    flag_read_in: True
+    activation_function: gelu_new # linear gelu_new
+    sigma: 0.5
+    flag_load_w_b: True
+---------------------------------------------------------------
+Mon Dec 18 08:21:24 PM EST 2023
+91
+GPU_ID=4
+python train.py --config conf/linear_regression.yaml
+model:
+    family: gpt2
+    n_embd: 64  # useless if flag_read_in == False
+    n_layer: 1
+    n_head: 1  # should be a factor of 6 if flag_read_in == False
+    flag_read_in: True
+    activation_function: gelu_new # linear gelu_new
+    sigma: 0.7
+    flag_load_w_b: True
+---------------------------------------------------------------
+Mon Dec 18 08:23:36 PM EST 2023
+92
+GPU_ID=4
+python train.py --config conf/linear_regression.yaml
+model:
+    family: gpt2
+    n_embd: 64  # useless if flag_read_in == False
+    n_layer: 1
+    n_head: 1  # should be a factor of 6 if flag_read_in == False
+    flag_read_in: True
+    activation_function: gelu_new # linear gelu_new
+    sigma: 0.01
+    flag_load_w_b: True
+---------------------------------------------------------------
+Mon Dec 18 08:23:43 PM EST 2023
+93
+GPU_ID=4
+python train.py --config conf/linear_regression.yaml
+model:
+    family: gpt2
+    n_embd: 64  # useless if flag_read_in == False
+    n_layer: 1
+    n_head: 1  # should be a factor of 6 if flag_read_in == False
+    flag_read_in: True
+    activation_function: gelu_new # linear gelu_new
+    sigma: 0.05
+    flag_load_w_b: True
+---------------------------------------------------------------
+Mon Dec 18 08:23:51 PM EST 2023
+94
+GPU_ID=4
+python train.py --config conf/linear_regression.yaml
+model:
+    family: gpt2
+    n_embd: 64  # useless if flag_read_in == False
+    n_layer: 1
+    n_head: 1  # should be a factor of 6 if flag_read_in == False
+    flag_read_in: True
+    activation_function: gelu_new # linear gelu_new
+    sigma: 0.1
+    flag_load_w_b: True
+---------------------------------------------------------------
+Mon Dec 18 08:23:59 PM EST 2023
+95
+GPU_ID=4
+python train.py --config conf/linear_regression.yaml
+model:
+    family: gpt2
+    n_embd: 64  # useless if flag_read_in == False
+    n_layer: 1
+    n_head: 1  # should be a factor of 6 if flag_read_in == False
+    flag_read_in: True
+    activation_function: gelu_new # linear gelu_new
+    sigma: 0.2
+    flag_load_w_b: True
+---------------------------------------------------------------
+Mon Dec 18 08:24:08 PM EST 2023
+96
+GPU_ID=4
+python train.py --config conf/linear_regression.yaml
+model:
+    family: gpt2
+    n_embd: 64  # useless if flag_read_in == False
+    n_layer: 1
+    n_head: 1  # should be a factor of 6 if flag_read_in == False
+    flag_read_in: True
+    activation_function: gelu_new # linear gelu_new
+    sigma: 0.3
+    flag_load_w_b: True
+---------------------------------------------------------------
+Mon Dec 18 08:24:15 PM EST 2023
+97
+GPU_ID=4
+python train.py --config conf/linear_regression.yaml
+model:
+    family: gpt2
+    n_embd: 64  # useless if flag_read_in == False
+    n_layer: 1
+    n_head: 1  # should be a factor of 6 if flag_read_in == False
+    flag_read_in: True
+    activation_function: gelu_new # linear gelu_new
+    sigma: 0.5
+    flag_load_w_b: True
+---------------------------------------------------------------
+Mon Dec 18 08:24:22 PM EST 2023
+98
+GPU_ID=4
+python train.py --config conf/linear_regression.yaml
+model:
+    family: gpt2
+    n_embd: 64  # useless if flag_read_in == False
+    n_layer: 1
+    n_head: 1  # should be a factor of 6 if flag_read_in == False
+    flag_read_in: True
+    activation_function: gelu_new # linear gelu_new
+    sigma: 0.7
+    flag_load_w_b: True
+---------------------------------------------------------------
+Mon Dec 18 08:24:28 PM EST 2023
+99
+GPU_ID=4
+python train.py --config conf/linear_regression.yaml
+model:
+    family: gpt2
+    n_embd: 64  # useless if flag_read_in == False
+    n_layer: 1
+    n_head: 1  # should be a factor of 6 if flag_read_in == False
+    flag_read_in: True
+    activation_function: gelu_new # linear gelu_new
+    sigma: 1
+    flag_load_w_b: True
+---------------------------------------------------------------
+Mon Dec 18 08:24:49 PM EST 2023
+100
+GPU_ID=4
+python train.py --config conf/linear_regression.yaml
+model:
+    family: gpt2
+    n_embd: 64  # useless if flag_read_in == False
+    n_layer: 1
+    n_head: 16  # should be a factor of 6 if flag_read_in == False
+    flag_read_in: True
+    activation_function: gelu_new # linear gelu_new
+    sigma: 1
+    flag_load_w_b: True
+---------------------------------------------------------------
+Mon Dec 18 08:25:08 PM EST 2023
+101
+GPU_ID=4
+python train.py --config conf/linear_regression.yaml
+model:
+    family: gpt2
+    n_embd: 64  # useless if flag_read_in == False
+    n_layer: 1
+    n_head: 16  # should be a factor of 6 if flag_read_in == False
+    flag_read_in: True
+    activation_function: gelu_new # linear gelu_new
+    sigma: 0.7
+    flag_load_w_b: True
+---------------------------------------------------------------
+Mon Dec 18 08:25:17 PM EST 2023
+102
+GPU_ID=4
+python train.py --config conf/linear_regression.yaml
+model:
+    family: gpt2
+    n_embd: 64  # useless if flag_read_in == False
+    n_layer: 1
+    n_head: 16  # should be a factor of 6 if flag_read_in == False
+    flag_read_in: True
+    activation_function: gelu_new # linear gelu_new
+    sigma: 0.5
+    flag_load_w_b: True
+---------------------------------------------------------------
+Mon Dec 18 08:25:26 PM EST 2023
+103
+GPU_ID=4
+python train.py --config conf/linear_regression.yaml
+model:
+    family: gpt2
+    n_embd: 64  # useless if flag_read_in == False
+    n_layer: 1
+    n_head: 16  # should be a factor of 6 if flag_read_in == False
+    flag_read_in: True
+    activation_function: gelu_new # linear gelu_new
+    sigma: 0.3
+    flag_load_w_b: True
+---------------------------------------------------------------
+Mon Dec 18 08:25:44 PM EST 2023
+104
+GPU_ID=5
+python train.py --config conf/linear_regression.yaml
+model:
+    family: gpt2
+    n_embd: 64  # useless if flag_read_in == False
+    n_layer: 1
+    n_head: 16  # should be a factor of 6 if flag_read_in == False
+    flag_read_in: True
+    activation_function: gelu_new # linear gelu_new
+    sigma: 0.2
+    flag_load_w_b: True
+---------------------------------------------------------------
+Mon Dec 18 08:29:27 PM EST 2023
+105
+GPU_ID=5
+python train.py --config conf/linear_regression.yaml
+model:
+    family: gpt2
+    n_embd: 64  # useless if flag_read_in == False
+    n_layer: 1
+    n_head: 16  # should be a factor of 6 if flag_read_in == False
+    flag_read_in: True
+    activation_function: gelu_new # linear gelu_new
+    sigma: 0.1
+    flag_load_w_b: True
+---------------------------------------------------------------
+Mon Dec 18 08:29:37 PM EST 2023
+106
+GPU_ID=5
+python train.py --config conf/linear_regression.yaml
+model:
+    family: gpt2
+    n_embd: 64  # useless if flag_read_in == False
+    n_layer: 1
+    n_head: 16  # should be a factor of 6 if flag_read_in == False
+    flag_read_in: True
+    activation_function: gelu_new # linear gelu_new
+    sigma: 0.05
+    flag_load_w_b: True
+---------------------------------------------------------------
+Mon Dec 18 08:29:45 PM EST 2023
+107
+GPU_ID=5
+python train.py --config conf/linear_regression.yaml
+model:
+    family: gpt2
+    n_embd: 64  # useless if flag_read_in == False
+    n_layer: 1
+    n_head: 16  # should be a factor of 6 if flag_read_in == False
+    flag_read_in: True
+    activation_function: gelu_new # linear gelu_new
+    sigma: 0.01
+    flag_load_w_b: True
+---------------------------------------------------------------
