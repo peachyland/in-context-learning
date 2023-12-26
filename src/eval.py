@@ -16,6 +16,7 @@ from tasks import get_task_sampler
 
 def get_model_from_run(run_path, step=-1, only_conf=False):
     config_path = os.path.join(run_path, "config.yaml")
+    # import pdb ; pdb.set_trace()
     with open(config_path) as fp:  # we don't Quinfig it to avoid inherits
         conf = Munch.fromDict(yaml.safe_load(fp))
     # if only_conf:
@@ -391,12 +392,16 @@ def baseline_names(name):
     return name
 
 
-def read_run_dir(run_dir):
+def read_run_dir(run_dir, single_task=False, job_id=None):
     all_runs = {}
     for task in os.listdir(run_dir):
         task_dir = os.path.join(run_dir, task)
         for run_id in os.listdir(task_dir):
             run_path = os.path.join(task_dir, run_id)
+            if single_task and job_id not in run_id:
+                continue
+            # print(run_path)
+            # import pdb ; pdb.set_trace()
             _, conf = get_model_from_run(run_path, only_conf=True)
             params = {}
             params["run_id"] = run_id

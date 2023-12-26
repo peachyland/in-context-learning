@@ -13,16 +13,30 @@ from base_models import NeuralNetwork, ParallelNetworks
 
 
 def build_model(conf):
+    # import pdb ; pdb.set_trace()
     if conf.family == "gpt2":
-        model = TransformerModel(
-            n_dims=conf.n_dims,
-            n_positions=conf.n_positions,
-            n_embd=conf.n_embd,
-            n_layer=conf.n_layer,
-            n_head=conf.n_head,
-            flag_read_in=conf.flag_read_in,
-            activation_function=conf.activation_function,
-        )
+        if hasattr(conf, 'activation_function'):
+            print("Confirmed activation_function")
+            model = TransformerModel(
+                n_dims=conf.n_dims,
+                n_positions=conf.n_positions,
+                n_embd=conf.n_embd,
+                n_layer=conf.n_layer,
+                n_head=conf.n_head,
+                flag_read_in=conf.flag_read_in,
+                activation_function=conf.activation_function,
+            )
+        else:
+            print("No activation_function")
+            model = TransformerModel(
+                n_dims=conf.n_dims,
+                n_positions=conf.n_positions,
+                n_embd=conf.n_embd,
+                n_layer=conf.n_layer,
+                n_head=conf.n_head,
+                flag_read_in=conf.flag_read_in,
+                # activation_function=conf.activation_function,
+            )
     else:
         raise NotImplementedError
 

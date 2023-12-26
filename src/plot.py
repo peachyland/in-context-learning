@@ -11,15 +11,34 @@ from tqdm.notebook import tqdm
 from eval import get_run_metrics, read_run_dir, get_model_from_run
 from plot_utils import basic_plot, collect_results, relevant_model_names
 
+def list_subfolders(directory):
+    """
+    List all subfolders in the specified directory.
+    
+    :param directory: Path to the directory to search for subfolders.
+    :return: A list containing the names of the subfolders.
+    """
+    return [folder for folder in os.listdir(directory) if os.path.isdir(os.path.join(directory, folder))]
+
+# Example usage:
+# subfolders = list_subfolders('/path/to/directory')
+# print(subfolders)
+sub_tasks = list_subfolders("/egr/research-dselab/renjie3/renjie/LLM/multi_head/in-context-learning/models/linear_regression")
+
+# for task in sub_tasks:
+
+
 sns.set_theme('notebook', 'darkgrid')
 palette = sns.color_palette('colorblind')
 
 run_dir = "../models"
-
-df = read_run_dir(run_dir)
-print(df)
 task = 'linear_regression'
-run_id = "jobid43_embd128_layer1_head8_read_inTrue_e9fa9b32-b311-471d-a10c-faedaf1ba5f6"  # if you train more models, replace with the run_id from the table above
+run_id = "jobid79_embd6_layer1_head1_read_inFalse_83fa2198-fd5d-4056-8a40-f083d114dae3"  # if you train more models, replace with the run_id from the table above
+
+
+
+df = read_run_dir(run_dir, single_task=True, job_id=run_id)
+print(df)
 
 # jobid30_embd64_layer1_head1_read_inFalse_34312e97-f075-4b99-8c75-1283e4dbd150
 # jobid31_embd64_layer1_head2_read_inFalse_b62d442a-c261-4544-a8e9-e9803b45a4c0
