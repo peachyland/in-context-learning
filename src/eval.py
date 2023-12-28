@@ -43,6 +43,7 @@ def get_model_from_run(run_path, step=-1, only_conf=False):
 
 
 def eval_batch(model, task_sampler, xs, xs_p=None):
+    # print(task_sampler)
     task = task_sampler()
     if torch.cuda.is_available() and model.name.split("_")[0] in ["gpt2", "lstm"]:
         device = "cuda"
@@ -181,6 +182,7 @@ def eval_model(
     prompting_strategy,
     num_eval_examples=1280,
     batch_size=64,
+    sigma=1,
     data_sampler_kwargs={},
     task_sampler_kwargs={},
 ):
@@ -198,6 +200,18 @@ def eval_model(
     task_sampler = get_task_sampler(
         task_name, n_dims, batch_size, **task_sampler_kwargs
     )
+    # print("check here")
+    # print("####################################")
+    # print("#")
+    # print("#")
+    # print("# [Warning!] Danger! You are using flag_load_w_b=True. Please be careful. Also, pay attention to task samplers.")
+    # print("#")
+    # print("#")
+    # print("####################################")
+    # # import pdb ; pdb.set_trace()
+    # task_sampler = get_task_sampler(
+    #     task_name, n_dims, batch_size, w_b_save_path="./theta0_1227_nobatch.pt", flag_load_w_b=True, sigma=sigma, **task_sampler_kwargs
+    # )
 
     all_metrics = []
 
@@ -216,7 +230,7 @@ def eval_model(
     return aggregate_metrics(metrics)
 
 
-def build_evals(conf):
+def build_evals(conf): # Only need standard
     n_dims = conf.model.n_dims
     n_points = conf.training.curriculum.points.end
     batch_size = conf.training.batch_size
@@ -232,6 +246,8 @@ def build_evals(conf):
         "data_name": data_name,
         "prompting_strategy": "standard",
     }
+    if hasattr(conf.model, 'sigma'):
+        base_kwargs["sigma"] = conf.model.sigma
 
     evaluation_kwargs = {}
 
@@ -294,6 +310,7 @@ def compute_evals(all_models, evaluation_kwargs, save_path=None, recompute=False
     #     with open(save_path) as fp:
     #         all_metrics = json.load(fp)
     # except Exception:
+    # import pdb ; pdb.set_trace()
     all_metrics = {}
     for eval_name, kwargs in tqdm(evaluation_kwargs.items()):
         metrics = {}
@@ -302,7 +319,8 @@ def compute_evals(all_models, evaluation_kwargs, save_path=None, recompute=False
         for model in all_models:
             if model.name in metrics and not recompute:
                 continue
-
+            # print(kwargs)
+            # import pdb ; pdb.set_trace()
             metrics[model.name] = eval_model(model, **kwargs)
         all_metrics[eval_name] = metrics
 
@@ -325,6 +343,23 @@ def get_run_metrics(
         if not skip_baselines:
             all_models += models.get_relevant_baselines(conf.training.task)
     evaluation_kwargs = build_evals(conf)
+
+    # print(conf)
+    # import pdb ; pdb.set_trace()
+    if True:
+        # test_key = 'noisyLR'
+        test_key = 'standard'
+        print("####################################")
+        print("#")
+        print("#")
+        print(f"# [Warning!] Danger! You are using only {test_key} test. Please be careful.")
+        print("#")
+        print("#")
+        print("####################################")
+        original_evaluation_kwargs = evaluation_kwargs
+        evaluation_kwargs = {}
+        # import pdb ; pdb.set_trace()
+        evaluation_kwargs['standard'] = original_evaluation_kwargs[test_key]
 
     if not cache:
         save_path = None

@@ -33,8 +33,8 @@ palette = sns.color_palette('colorblind')
 
 run_dir = "../models"
 task = 'linear_regression'
-run_id = "jobid79_embd6_layer1_head1_read_inFalse_83fa2198-fd5d-4056-8a40-f083d114dae3"  # if you train more models, replace with the run_id from the table above
-
+run_id = "jobid114_embd64_layer1_head1_read_inTrue_theta0True_sigma0.01_fca2b4ff-5eab-43aa-83ae-04acb3fd3e42"  # if you train more models, replace with the run_id from the table above 
+# jobid114_embd64_layer1_head1_read_inTrue_theta0True_sigma0.01_fca2b4ff-5eab-43aa-83ae-04acb3fd3e42
 
 
 df = read_run_dir(run_dir, single_task=True, job_id=run_id)
@@ -69,6 +69,7 @@ run_path = os.path.join(run_dir, task, run_id)
 recompute_metrics = False
 
 if recompute_metrics:
+    print("recompute_metrics")
     get_run_metrics(run_path)  # these are normally precomputed at the end of training
 
 
@@ -76,6 +77,8 @@ def valid_row(r):
     return r.task == task and r.run_id == run_id #and r.run_id2 == run_id2
 
 metrics = collect_results(run_dir, df, valid_row=valid_row)
+
+# import pdb ; pdb.set_trace()
 
 models = relevant_model_names[task]
 prefix_split = run_id.split('_')
@@ -86,18 +89,18 @@ else:
     models[0] = f"Transformer-1-layer-{n_head}-head"
 # print(models)
 # import pdb ; pdb.set_trace()
-basic_plot(metrics["standard"], models=models)
+basic_plot(metrics["standard"], models=models, use_log=False)
 output_file_path = f"./plot_results/{run_id}"
 
 # plt.figure(figsize=(12, 6))  # Adjusting the width and height of the figure
 
-plt.yticks(fontsize=8)
-plt.ylabel('squared error', fontsize=8)  
-plt.xticks(fontsize=8)
-plt.xlabel('in-context examples', fontsize=6)  
+plt.yticks(fontsize=16)
+plt.ylabel('squared error', fontsize=16)  
+plt.xticks(fontsize=16)
+plt.xlabel('in-context examples', fontsize=12)  
 for line in plt.gca().lines:
-    line.set_linewidth(1)
-plt.legend(fontsize=6, loc=3)  
+    line.set_linewidth(2)
+plt.legend(fontsize=12, loc=3)
 plt.tight_layout()  
 plt.savefig(f"{output_file_path}.png") 
 

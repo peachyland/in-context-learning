@@ -3,6 +3,8 @@ import os
 import matplotlib.pyplot as plt
 import seaborn as sns
 
+import numpy as np
+
 from eval import get_run_metrics, baseline_names, get_model_from_run
 from models import build_model
 
@@ -40,7 +42,7 @@ relevant_model_names = {
 }
 
 
-def basic_plot(metrics, models=None, trivial=1.0):
+def basic_plot(metrics, models=None, trivial=1.0, use_log=False):
     fig, ax = plt.subplots(1, 1)
 
     # print(metrics.keys())
@@ -52,18 +54,25 @@ def basic_plot(metrics, models=None, trivial=1.0):
     color = 0
     ax.axhline(trivial, ls="--", color="gray")
     for name, vs in metrics.items():
-        ax.plot(vs["mean"], "-", label=name, color=palette[color % 10], lw=2)
+        ax.plot(vs["mean"], "-", label=name, color=palette[color % 10], lw=4)
         low = vs["bootstrap_low"]
         high = vs["bootstrap_high"]
         ax.fill_between(range(len(low)), low, high, alpha=0.3)
         color += 1
-    ax.set_xlabel("in-context examples")
-    ax.set_ylabel("squared error")
-    ax.set_xlim(-1, len(low) + 0.1)
-    ax.set_ylim(-0.1, 1.25)
+    if use_log:
+        plt.yscale('symlog', linthresh=1e-6)
+    ax.set_xlabel("in-context examples", fontsize=24)
+    ax.set_ylabel("squared error", fontsize=24)
+    if use_log:
+        ax.set_xlim(-1, len(low) + 0.1)
+        ax.set_ylim(10e-4, 10)
+    else:
+        ax.set_xlim(-1, len(low) + 0.1)
+        ax.set_ylim(-0.1, 1.25)
 
     # legend = ax.legend(loc="upper left", bbox_to_anchor=(1, 1))
-    fig.set_size_inches(4, 3)
+    # fig.set_size_inches(4, 3)
+    fig.set_size_inches(8, 6)
     # for line in legend.get_lines():
     #     line.set_linewidth(3)
 
@@ -71,10 +80,13 @@ def basic_plot(metrics, models=None, trivial=1.0):
 
 
 def collect_results(run_dir, df, valid_row=None, rename_eval=None, rename_model=None):
+    # import pdb ; pdb.set_trace()
     all_metrics = {}
     for _, r in df.iterrows():
+        # print("check1")
         if valid_row is not None and not valid_row(r):
             continue
+        # print("check2")
 
         run_path = os.path.join(run_dir, r.task, r.run_id)
         _, conf = get_model_from_run(run_path, only_conf=True)
@@ -83,6 +95,7 @@ def collect_results(run_dir, df, valid_row=None, rename_eval=None, rename_model=
 
         # print(metrics)
         # input("check")
+        # import pdb ; pdb.set_trace()
 
         for eval_name, results in sorted(metrics.items()):
             processed_results = {}
@@ -118,6 +131,7 @@ def collect_results(run_dir, df, valid_row=None, rename_eval=None, rename_model=
                 all_metrics[eval_name] = {}
             all_metrics[eval_name].update(processed_results)
     # print(all_metrics.keys())
+    # import pdb ; pdb.set_trace()
     # input("check")
     return all_metrics
 

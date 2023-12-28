@@ -27,7 +27,7 @@ def build_model(conf):
                 activation_function=conf.activation_function,
             )
         else:
-            print("No activation_function")
+            print("No activation_function in conf. Used default.")
             model = TransformerModel(
                 n_dims=conf.n_dims,
                 n_positions=conf.n_positions,

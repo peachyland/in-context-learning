@@ -69,7 +69,7 @@ def train(model, args):
         n_dims,
         bsize,
         num_tasks=args.training.num_tasks,
-        w_b_save_path="./theta0.pt",
+        w_b_save_path="./theta0_1227_nobatch.pt",
         flag_load_w_b=args.model.flag_load_w_b,
         sigma=args.model.sigma,
         **args.training.task_kwargs,

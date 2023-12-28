@@ -62,6 +62,7 @@ def get_task_sampler(
         "decision_tree": DecisionTree,
     }
     if task_name in task_names_to_classes:
+        # print(task_name)
         task_cls = task_names_to_classes[task_name]
         if num_tasks is not None:
             if pool_dict is not None:
@@ -74,7 +75,7 @@ def get_task_sampler(
 
 
 class LinearRegression(Task):
-    def __init__(self, n_dims, batch_size, pool_dict=None, seeds=None, scale=1, w_b_save_path="./theta0.pt", flag_load_w_b=False, sigma=1):
+    def __init__(self, n_dims, batch_size, pool_dict=None, seeds=None, scale=1, w_b_save_path="./theta0_1227_nobatch.pt", flag_load_w_b=False, sigma=1):
         """scale: a constant by which to scale the randomly sampled weights."""
         super(LinearRegression, self).__init__(n_dims, batch_size, pool_dict, seeds)
         self.scale = scale
@@ -93,13 +94,55 @@ class LinearRegression(Task):
             indices = torch.randperm(len(pool_dict["w"]))[:batch_size]
             self.w_b = pool_dict["w"][indices]
 
-        # print("sigma", sigma)
-        # import pdb ; pdb.set_trace()
-
         if flag_load_w_b:
             self.theta_0 = torch.load(w_b_save_path) / sigma
+            self.theta_0 = self.theta_0.unsqueeze(0).repeat(self.b_size, 1, 1)
+            # import pdb ; pdb.set_trace()
             self.w_b += self.theta_0
             # print(f"Theta0 is loaded from {w_b_save_path}")
+        # import pdb ; pdb.set_trace()
+
+        # print("####################################")
+        # print("#")
+        # print("#")
+        # print("# [Warning!] Danger! You are using alpha and eta. Please be careful.")
+        # print("#")
+        # print("#")
+        # print("####################################")
+
+        flag_use_alpha = False
+        alpha = 0
+        if flag_use_alpha:
+            # # random 
+            # self.eta = torch.randn(1, self.n_dims, 1).repeat(self.b_size, 1, 1)
+            # self.eta = self.eta / torch.norm(self.eta, p=2, dim=1, keepdim=True) * torch.norm(self.theta_0, p=2, dim=1, keepdim=True)
+            # self.w_b = self.theta_0 + alpha * self.eta
+            # # parallel
+            # self.eta = self.theta_0
+            # self.w_b = self.theta_0 + alpha * self.eta
+            # # parallel reverse
+            # self.eta = - self.theta_0
+            # self.w_b = self.theta_0 + alpha * self.eta
+            # # per
+            def gram_schmidt(vectors):
+                basis = []
+                for v in vectors:
+                    w = v - sum((v.dot(u) / u.dot(u)) * u for u in basis)
+                    if (w.norm() > 1e-10):  # avoid adding near-zero vectors
+                        basis.append(w)
+                return basis
+            # Your original 5D vector
+            original_vector = torch.tensor(self.theta_0[0, :, 0], dtype=torch.float32)
+            # Generating 4 random 5D vectors
+            random_vectors = [torch.randn(5) for _ in range(4)]
+            # Include the original vector as the first vector in the list
+            all_vectors = [original_vector] + random_vectors
+            # Apply Gram-Schmidt process
+            orthogonal_basis = gram_schmidt(all_vectors)
+            self.eta = orthogonal_basis[1].unsqueeze(0).unsqueeze(2).repeat(self.b_size, 1, 1)
+            self.eta = self.eta / torch.norm(self.eta, p=2, dim=1, keepdim=True) * torch.norm(self.theta_0, p=2, dim=1, keepdim=True)
+            self.w_b = self.theta_0 + alpha * self.eta
+            # import pdb ; pdb.set_trace()
 
     def evaluate(self, xs_b):
         w_b = self.w_b.to(xs_b.device)
