@@ -59,3 +59,34 @@ class GaussianSampler(DataSampler):
         if n_dims_truncated is not None:
             xs_b[:, :, n_dims_truncated:] = 0
         return xs_b
+    
+# class GaussianSampler(DataSampler):
+#     def __init__(self, n_dims, bias=None, scale=None):
+#         super().__init__(n_dims)
+#         self.bias = bias
+#         self.scale = scale
+
+#         print("####################################")
+#         print("#")
+#         print(f"# [Warning!] Danger! You are using only neighbor examples. Please be careful.")
+#         print("#")
+#         print("####################################")
+
+#     def sample_xs(self, n_points, b_size, n_dims_truncated=None, seeds=None):
+#         local_variance = 1
+#         xs_q = torch.randn(b_size, 1, self.n_dims, device='cuda:0')
+#         if n_points == 1:
+#             xs_b = xs_q
+#         else:
+#             xs_icl = xs_q + local_variance * torch.randn(b_size, n_points-1, self.n_dims, device='cuda:0')
+#             xs_b = torch.cat([xs_icl, xs_q], dim=1)
+#         #     import pdb ; pdb.set_trace()
+#         # import pdb ; pdb.set_trace()
+        
+#         if self.scale is not None:
+#             xs_b = xs_b @ self.scale.to(xs_b.device)
+#         if self.bias is not None:
+#             xs_b += self.bias
+#         if n_dims_truncated is not None:
+#             xs_b[:, :, n_dims_truncated:] = 0
+#         return xs_b

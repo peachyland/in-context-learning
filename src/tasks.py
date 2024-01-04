@@ -80,6 +80,9 @@ class LinearRegression(Task):
         super(LinearRegression, self).__init__(n_dims, batch_size, pool_dict, seeds)
         self.scale = scale
 
+        # print(seeds)
+        # import pdb ; pdb.set_trace()
+
         if pool_dict is None and seeds is None:
             self.w_b = torch.randn(self.b_size, self.n_dims, 1)
         elif seeds is not None:
@@ -98,31 +101,34 @@ class LinearRegression(Task):
             self.theta_0 = torch.load(w_b_save_path) / sigma
             self.theta_0 = self.theta_0.unsqueeze(0).repeat(self.b_size, 1, 1)
             # import pdb ; pdb.set_trace()
+            self.w_b_old = self.w_b.detach().clone()
+            # print("check1: ", torch.sum(self.w_b_old))
             self.w_b += self.theta_0
+            # print("check2: ", torch.sum(self.w_b_old))
             # print(f"Theta0 is loaded from {w_b_save_path}")
         # import pdb ; pdb.set_trace()
 
-        # print("####################################")
-        # print("#")
-        # print("#")
-        # print("# [Warning!] Danger! You are using alpha and eta. Please be careful.")
-        # print("#")
-        # print("#")
-        # print("####################################")
-
         flag_use_alpha = False
-        alpha = 0
+        print("####################################")
+        print("#")
+        print("#")
+        print("# [Warning!] Danger! You are using alpha and eta. Please be careful.")
+        print("#")
+        print("#")
+        print("####################################")
+        flag_use_alpha = True
+        alpha = 0.1
         if flag_use_alpha:
-            # # random 
+            # # random
             # self.eta = torch.randn(1, self.n_dims, 1).repeat(self.b_size, 1, 1)
             # self.eta = self.eta / torch.norm(self.eta, p=2, dim=1, keepdim=True) * torch.norm(self.theta_0, p=2, dim=1, keepdim=True)
-            # self.w_b = self.theta_0 + alpha * self.eta
+            # self.w_b = self.w_b_old + self.theta_0 + alpha * self.eta
             # # parallel
             # self.eta = self.theta_0
-            # self.w_b = self.theta_0 + alpha * self.eta
-            # # parallel reverse
+            # self.w_b = self.w_b_old + self.theta_0 + alpha * self.eta
+            # parallel reverse
             # self.eta = - self.theta_0
-            # self.w_b = self.theta_0 + alpha * self.eta
+            # self.w_b = self.w_b_old + self.theta_0 + alpha * self.eta
             # # per
             def gram_schmidt(vectors):
                 basis = []
@@ -141,7 +147,7 @@ class LinearRegression(Task):
             orthogonal_basis = gram_schmidt(all_vectors)
             self.eta = orthogonal_basis[1].unsqueeze(0).unsqueeze(2).repeat(self.b_size, 1, 1)
             self.eta = self.eta / torch.norm(self.eta, p=2, dim=1, keepdim=True) * torch.norm(self.theta_0, p=2, dim=1, keepdim=True)
-            self.w_b = self.theta_0 + alpha * self.eta
+            self.w_b = self.w_b_old + self.theta_0 + alpha * self.eta
             # import pdb ; pdb.set_trace()
 
     def evaluate(self, xs_b):

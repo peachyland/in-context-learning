@@ -49,12 +49,15 @@ def eval_batch(model, task_sampler, xs, xs_p=None):
         device = "cuda"
     else:
         device = "cpu"
-
+    # print(xs_p)
+    # import pdb ; pdb.set_trace()
     if xs_p is None:
         ys = task.evaluate(xs)
 
         b_size, n_points, _ = xs.shape
         metrics = torch.zeros(b_size, n_points)
+        print(b_size)
+        import pdb ; pdb.set_trace()
         # for i in range(n_points):
         #     xs_comb = xs.clone()
         #     ys = task.evaluate(xs_comb)
@@ -71,9 +74,20 @@ def eval_batch(model, task_sampler, xs, xs_p=None):
         for i in range(n_points):
             xs_comb = xs.clone()
             ys_pred = ys.clone()
+
             pred = model(xs_comb[:,:i+1].to(device), ys_pred[:,:i+1].to(device), inds=[i]).detach()
             pred = pred.squeeze()
             metrics[:, i] = task.get_metric()(pred.to(ys_pred.device), ys_pred[:,i])
+
+            # print("####################################")
+            # print("#")
+            # print("# [Warning!] Danger! You are using only the last example as x_q. Please be careful.")
+            # print("#")
+            # print("####################################")
+
+            # pred = model(xs_comb[:,n_points-i-1:].to(device), ys_pred[:,n_points-i-1:].to(device), inds=[i]).detach()
+            # pred = pred.squeeze()
+            # metrics[:, i] = task.get_metric()(pred.to(ys_pred.device), ys_pred[:,-1])
     else:
         b_size, n_points, _ = xs.shape
         metrics = torch.zeros(b_size, n_points)
@@ -197,23 +211,26 @@ def eval_model(
 
     assert num_eval_examples % batch_size == 0
     data_sampler = get_data_sampler(data_name, n_dims, **data_sampler_kwargs)
-    task_sampler = get_task_sampler(
-        task_name, n_dims, batch_size, **task_sampler_kwargs
-    )
-    # print("check here")
-    # print("####################################")
-    # print("#")
-    # print("#")
-    # print("# [Warning!] Danger! You are using flag_load_w_b=True. Please be careful. Also, pay attention to task samplers.")
-    # print("#")
-    # print("#")
-    # print("####################################")
-    # # import pdb ; pdb.set_trace()
     # task_sampler = get_task_sampler(
-    #     task_name, n_dims, batch_size, w_b_save_path="./theta0_1227_nobatch.pt", flag_load_w_b=True, sigma=sigma, **task_sampler_kwargs
+    #     task_name, n_dims, batch_size, **task_sampler_kwargs
     # )
+    print("check here")
+    print("####################################")
+    print("#")
+    print("#")
+    print("# [Warning!] Danger! You are using flag_load_w_b=True. Please be careful. Also, pay attention to task samplers.")
+    print("#")
+    print("#")
+    print("####################################")
+    # import pdb ; pdb.set_trace()
+    task_sampler = get_task_sampler(
+        task_name, n_dims, batch_size, w_b_save_path="./theta0_1227_nobatch.pt", flag_load_w_b=True, sigma=sigma, **task_sampler_kwargs
+    )
 
     all_metrics = []
+
+    # print(num_eval_examples)
+    # import pdb ; pdb.set_trace()
 
     generating_func = globals()[f"gen_{prompting_strategy}"]
     for i in range(num_eval_examples // batch_size):
@@ -237,6 +254,8 @@ def build_evals(conf): # Only need standard
 
     task_name = conf.training.task
     data_name = conf.training.data
+
+    # import pdb ; pdb.set_trace()
 
     base_kwargs = {
         "task_name": task_name,
@@ -347,8 +366,8 @@ def get_run_metrics(
     # print(conf)
     # import pdb ; pdb.set_trace()
     if True:
-        # test_key = 'noisyLR'
         test_key = 'standard'
+        # test_key = 'standard'
         print("####################################")
         print("#")
         print("#")

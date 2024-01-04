@@ -55,7 +55,7 @@ legend_names = ['0.01', '0.05', '0.1', '0.5', '1']
 # head 1 ['0.01', '0.05', '0.1', '0.5', '1'], [114, 115, 116, 119, 120]
 # head 16 ['0.01', '0.05', '0.1', '0.5', '1'], [121, 122, 123, 124, 125]
 if args.job_by_list:
-    target_jobid = [f"jobid{job_id}" for job_id in [121, 122, 123, 124, 125]] # emb64: [39, 40, 51, 41]
+    target_jobid = [f"jobid{job_id}" for job_id in [114, 115, 116, 119, 120]] # emb64: [39, 40, 51, 41]
 else:
     target_jobid = [f"jobid{job_id}" for job_id in range(start_id, end_id+1)]
 

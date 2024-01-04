@@ -33,7 +33,7 @@ palette = sns.color_palette('colorblind')
 
 run_dir = "../models"
 task = 'linear_regression'
-run_id = "jobid114_embd64_layer1_head1_read_inTrue_theta0True_sigma0.01_fca2b4ff-5eab-43aa-83ae-04acb3fd3e42"  # if you train more models, replace with the run_id from the table above 
+run_id = "jobid40_embd64_layer1_head8_read_inTrue_debad986-60a7-41dd-a06c-013e4691667c"  # if you train more models, replace with the run_id from the table above 
 # jobid114_embd64_layer1_head1_read_inTrue_theta0True_sigma0.01_fca2b4ff-5eab-43aa-83ae-04acb3fd3e42
 
 
