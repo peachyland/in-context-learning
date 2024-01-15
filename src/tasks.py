@@ -61,6 +61,10 @@ def get_task_sampler(
         "relu_2nn_regression": Relu2nnRegression,
         "decision_tree": DecisionTree,
     }
+    # import pdb ; pdb.set_trace()
+    if task_name == 'noisy_linear_regression':
+        kwargs['renormalize_ys'] = True
+        kwargs['noise_std'] = 1
     if task_name in task_names_to_classes:
         # print(task_name)
         task_cls = task_names_to_classes[task_name]
@@ -109,46 +113,52 @@ class LinearRegression(Task):
         # import pdb ; pdb.set_trace()
 
         flag_use_alpha = False
-        print("####################################")
-        print("#")
-        print("#")
-        print("# [Warning!] Danger! You are using alpha and eta. Please be careful.")
-        print("#")
-        print("#")
-        print("####################################")
-        flag_use_alpha = True
-        alpha = 0.1
+        # print("####################################")
+        # print("#")
+        # print("#")
+        # print("# [Warning!] Danger! You are using alpha and eta. Please be careful.")
+        # print("#")
+        # print("#")
+        # print("####################################")
+        # flag_use_alpha = True
+        method_id = 0
+        if method_id == 0:
+            alpha = 0
+        else:
+            alpha = 0.1
         if flag_use_alpha:
             # # random
             # self.eta = torch.randn(1, self.n_dims, 1).repeat(self.b_size, 1, 1)
             # self.eta = self.eta / torch.norm(self.eta, p=2, dim=1, keepdim=True) * torch.norm(self.theta_0, p=2, dim=1, keepdim=True)
-            # self.w_b = self.w_b_old + self.theta_0 + alpha * self.eta
-            # # parallel
-            # self.eta = self.theta_0
-            # self.w_b = self.w_b_old + self.theta_0 + alpha * self.eta
-            # parallel reverse
-            # self.eta = - self.theta_0
-            # self.w_b = self.w_b_old + self.theta_0 + alpha * self.eta
-            # # per
-            def gram_schmidt(vectors):
-                basis = []
-                for v in vectors:
-                    w = v - sum((v.dot(u) / u.dot(u)) * u for u in basis)
-                    if (w.norm() > 1e-10):  # avoid adding near-zero vectors
-                        basis.append(w)
-                return basis
-            # Your original 5D vector
-            original_vector = torch.tensor(self.theta_0[0, :, 0], dtype=torch.float32)
-            # Generating 4 random 5D vectors
-            random_vectors = [torch.randn(5) for _ in range(4)]
-            # Include the original vector as the first vector in the list
-            all_vectors = [original_vector] + random_vectors
-            # Apply Gram-Schmidt process
-            orthogonal_basis = gram_schmidt(all_vectors)
-            self.eta = orthogonal_basis[1].unsqueeze(0).unsqueeze(2).repeat(self.b_size, 1, 1)
-            self.eta = self.eta / torch.norm(self.eta, p=2, dim=1, keepdim=True) * torch.norm(self.theta_0, p=2, dim=1, keepdim=True)
-            self.w_b = self.w_b_old + self.theta_0 + alpha * self.eta
-            # import pdb ; pdb.set_trace()
+            # self.w_b = self.theta_0 + alpha * self.eta
+            # parallel
+            if method_id == 1 or method_id == 0:
+                self.eta = self.theta_0
+                self.w_b = self.theta_0 + alpha * self.eta
+            elif method_id == 2:
+            # # parallel reverse
+                self.eta = - self.theta_0
+                self.w_b = self.theta_0 + alpha * self.eta
+            elif method_id == 3:
+                # per
+                def gram_schmidt(vectors):
+                    basis = []
+                    for v in vectors:
+                        w = v - sum((v.dot(u) / u.dot(u)) * u for u in basis)
+                        if (w.norm() > 1e-10):  # avoid adding near-zero vectors
+                            basis.append(w)
+                    return basis
+                # Your original 5D vector
+                original_vector = torch.tensor(self.theta_0[0, :, 0], dtype=torch.float32)
+                # Generating 4 random 5D vectors
+                random_vectors = [torch.randn(5) for _ in range(4)]
+                # Include the original vector as the first vector in the list
+                all_vectors = [original_vector] + random_vectors
+                # Apply Gram-Schmidt process
+                orthogonal_basis = gram_schmidt(all_vectors)
+                self.eta = orthogonal_basis[1].unsqueeze(0).unsqueeze(2).repeat(self.b_size, 1, 1)
+                self.eta = self.eta / torch.norm(self.eta, p=2, dim=1, keepdim=True) * torch.norm(self.theta_0, p=2, dim=1, keepdim=True)
+                self.w_b = self.w_b_old + self.theta_0 + alpha * self.eta
 
     def evaluate(self, xs_b):
         w_b = self.w_b.to(xs_b.device)
@@ -237,13 +247,17 @@ class NoisyLinearRegression(LinearRegression):
         scale=1,
         noise_std=0,
         renormalize_ys=False,
+        w_b_save_path="./theta0_1227_nobatch.pt", 
+        flag_load_w_b=False, 
+        sigma=1,
     ):
         """noise_std: standard deviation of noise added to the prediction."""
         super(NoisyLinearRegression, self).__init__(
-            n_dims, batch_size, pool_dict, seeds, scale
+            n_dims, batch_size, pool_dict, seeds, scale, w_b_save_path=w_b_save_path, flag_load_w_b=flag_load_w_b, sigma=sigma,
         )
         self.noise_std = noise_std
         self.renormalize_ys = renormalize_ys
+        # import pdb ; pdb.set_trace()
 
     def evaluate(self, xs_b):
         ys_b = super().evaluate(xs_b)

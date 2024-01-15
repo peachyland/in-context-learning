@@ -91,7 +91,7 @@ def collect_results(run_dir, df, valid_row=None, rename_eval=None, rename_model=
         run_path = os.path.join(run_dir, r.task, r.run_id)
         _, conf = get_model_from_run(run_path, only_conf=True)
 
-        metrics = get_run_metrics(run_path, skip_model_load=False)
+        metrics = get_run_metrics(run_path, skip_model_load=False, skip_baselines=True)
 
         # print(metrics)
         # input("check")
