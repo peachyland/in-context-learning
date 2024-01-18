@@ -366,8 +366,8 @@ def get_run_metrics(
     # print(conf)
     # import pdb ; pdb.set_trace()
     if True:
-        # test_key = 'noisyLR'
-        test_key = 'standard'
+        test_key = 'noisyLR'
+        # test_key = 'standard'
         print("####################################")
         print("#")
         print("#")

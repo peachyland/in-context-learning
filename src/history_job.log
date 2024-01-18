@@ -2606,3 +2606,325 @@ model:
     sigma: 1
     flag_load_w_b: False
 ---------------------------------------------------------------
+Wed Jan 17 02:48:26 PM EST 2024
+278 corr
+GPU_ID=0
+python train.py --config conf/linear_regression.yaml
+model:
+    family: gpt2
+    n_embd: 6  # useless if flag_read_in == False
+    n_layer: 1
+    n_head: 1  # should be a factor of 6 if flag_read_in == False
+    flag_read_in: False
+    activation_function: gelu_new # linear gelu_new
+    sigma: 1
+    flag_load_w_b: False
+---------------------------------------------------------------
+Wed Jan 17 02:49:30 PM EST 2024
+279
+GPU_ID=0
+python train.py --config conf/linear_regression.yaml
+model:
+    family: gpt2
+    n_embd: 6  # useless if flag_read_in == False
+    n_layer: 1
+    n_head: 1  # should be a factor of 6 if flag_read_in == False
+    flag_read_in: False
+    activation_function: gelu_new # linear gelu_new
+    sigma: 1
+    flag_load_w_b: False
+---------------------------------------------------------------
+Wed Jan 17 02:49:38 PM EST 2024
+280
+GPU_ID=0
+python train.py --config conf/linear_regression.yaml
+model:
+    family: gpt2
+    n_embd: 6  # useless if flag_read_in == False
+    n_layer: 1
+    n_head: 3  # should be a factor of 6 if flag_read_in == False
+    flag_read_in: False
+    activation_function: gelu_new # linear gelu_new
+    sigma: 1
+    flag_load_w_b: False
+---------------------------------------------------------------
+Wed Jan 17 02:49:48 PM EST 2024
+281
+GPU_ID=0
+python train.py --config conf/linear_regression.yaml
+model:
+    family: gpt2
+    n_embd: 6  # useless if flag_read_in == False
+    n_layer: 1
+    n_head: 6  # should be a factor of 6 if flag_read_in == False
+    flag_read_in: False
+    activation_function: gelu_new # linear gelu_new
+    sigma: 1
+    flag_load_w_b: False
+---------------------------------------------------------------
+Wed Jan 17 02:50:06 PM EST 2024
+282
+GPU_ID=0
+python train.py --config conf/linear_regression.yaml
+model:
+    family: gpt2
+    n_embd: 6  # useless if flag_read_in == False
+    n_layer: 1
+    n_head: 1  # should be a factor of 6 if flag_read_in == False
+    flag_read_in: True
+    activation_function: gelu_new # linear gelu_new
+    sigma: 1
+    flag_load_w_b: False
+---------------------------------------------------------------
+Wed Jan 17 02:50:23 PM EST 2024
+283
+GPU_ID=0
+python train.py --config conf/linear_regression.yaml
+model:
+    family: gpt2
+    n_embd: 6  # useless if flag_read_in == False
+    n_layer: 1
+    n_head: 2  # should be a factor of 6 if flag_read_in == False
+    flag_read_in: True
+    activation_function: gelu_new # linear gelu_new
+    sigma: 1
+    flag_load_w_b: False
+---------------------------------------------------------------
+Wed Jan 17 02:50:36 PM EST 2024
+284
+GPU_ID=0
+python train.py --config conf/linear_regression.yaml
+model:
+    family: gpt2
+    n_embd: 6  # useless if flag_read_in == False
+    n_layer: 1
+    n_head: 3  # should be a factor of 6 if flag_read_in == False
+    flag_read_in: True
+    activation_function: gelu_new # linear gelu_new
+    sigma: 1
+    flag_load_w_b: False
+---------------------------------------------------------------
+Wed Jan 17 02:50:47 PM EST 2024
+285
+GPU_ID=0
+python train.py --config conf/linear_regression.yaml
+model:
+    family: gpt2
+    n_embd: 6  # useless if flag_read_in == False
+    n_layer: 1
+    n_head: 6  # should be a factor of 6 if flag_read_in == False
+    flag_read_in: True
+    activation_function: gelu_new # linear gelu_new
+    sigma: 1
+    flag_load_w_b: False
+---------------------------------------------------------------
+Wed Jan 17 02:51:00 PM EST 2024
+286
+GPU_ID=0
+python train.py --config conf/linear_regression.yaml
+model:
+    family: gpt2
+    n_embd: 64  # useless if flag_read_in == False
+    n_layer: 1
+    n_head: 1  # should be a factor of 6 if flag_read_in == False
+    flag_read_in: True
+    activation_function: gelu_new # linear gelu_new
+    sigma: 1
+    flag_load_w_b: False
+---------------------------------------------------------------
+Wed Jan 17 02:51:35 PM EST 2024
+287
+GPU_ID=1
+python train.py --config conf/linear_regression.yaml
+model:
+    family: gpt2
+    n_embd: 64  # useless if flag_read_in == False
+    n_layer: 1
+    n_head: 8  # should be a factor of 6 if flag_read_in == False
+    flag_read_in: True
+    activation_function: gelu_new # linear gelu_new
+    sigma: 1
+    flag_load_w_b: False
+---------------------------------------------------------------
+Wed Jan 17 02:51:53 PM EST 2024
+288
+GPU_ID=1
+python train.py --config conf/linear_regression.yaml
+model:
+    family: gpt2
+    n_embd: 64  # useless if flag_read_in == False
+    n_layer: 1
+    n_head: 16  # should be a factor of 6 if flag_read_in == False
+    flag_read_in: True
+    activation_function: gelu_new # linear gelu_new
+    sigma: 1
+    flag_load_w_b: False
+---------------------------------------------------------------
+Wed Jan 17 02:52:03 PM EST 2024
+289
+GPU_ID=1
+python train.py --config conf/linear_regression.yaml
+model:
+    family: gpt2
+    n_embd: 64  # useless if flag_read_in == False
+    n_layer: 1
+    n_head: 64  # should be a factor of 6 if flag_read_in == False
+    flag_read_in: True
+    activation_function: gelu_new # linear gelu_new
+    sigma: 1
+    flag_load_w_b: False
+---------------------------------------------------------------
+Wed Jan 17 02:52:17 PM EST 2024
+290
+GPU_ID=1
+python train.py --config conf/linear_regression.yaml
+model:
+    family: gpt2
+    n_embd: 128  # useless if flag_read_in == False
+    n_layer: 1
+    n_head: 1  # should be a factor of 6 if flag_read_in == False
+    flag_read_in: True
+    activation_function: gelu_new # linear gelu_new
+    sigma: 1
+    flag_load_w_b: False
+---------------------------------------------------------------
+Wed Jan 17 02:52:28 PM EST 2024
+291
+GPU_ID=1
+python train.py --config conf/linear_regression.yaml
+model:
+    family: gpt2
+    n_embd: 128  # useless if flag_read_in == False
+    n_layer: 1
+    n_head: 8  # should be a factor of 6 if flag_read_in == False
+    flag_read_in: True
+    activation_function: gelu_new # linear gelu_new
+    sigma: 1
+    flag_load_w_b: False
+---------------------------------------------------------------
+Wed Jan 17 02:52:45 PM EST 2024
+292
+GPU_ID=1
+python train.py --config conf/linear_regression.yaml
+model:
+    family: gpt2
+    n_embd: 128  # useless if flag_read_in == False
+    n_layer: 1
+    n_head: 16  # should be a factor of 6 if flag_read_in == False
+    flag_read_in: True
+    activation_function: gelu_new # linear gelu_new
+    sigma: 1
+    flag_load_w_b: False
+---------------------------------------------------------------
+Wed Jan 17 02:52:54 PM EST 2024
+293
+GPU_ID=1
+python train.py --config conf/linear_regression.yaml
+model:
+    family: gpt2
+    n_embd: 128  # useless if flag_read_in == False
+    n_layer: 1
+    n_head: 64  # should be a factor of 6 if flag_read_in == False
+    flag_read_in: True
+    activation_function: gelu_new # linear gelu_new
+    sigma: 1
+    flag_load_w_b: False
+---------------------------------------------------------------
+Wed Jan 17 02:53:05 PM EST 2024
+294
+GPU_ID=1
+python train.py --config conf/linear_regression.yaml
+model:
+    family: gpt2
+    n_embd: 128  # useless if flag_read_in == False
+    n_layer: 1
+    n_head: 128  # should be a factor of 6 if flag_read_in == False
+    flag_read_in: True
+    activation_function: gelu_new # linear gelu_new
+    sigma: 1
+    flag_load_w_b: False
+---------------------------------------------------------------
+Wed Jan 17 02:53:16 PM EST 2024
+295
+GPU_ID=1
+python train.py --config conf/linear_regression.yaml
+model:
+    family: gpt2
+    n_embd: 256  # useless if flag_read_in == False
+    n_layer: 1
+    n_head: 1  # should be a factor of 6 if flag_read_in == False
+    flag_read_in: True
+    activation_function: gelu_new # linear gelu_new
+    sigma: 1
+    flag_load_w_b: False
+---------------------------------------------------------------
+Wed Jan 17 02:53:25 PM EST 2024
+296
+GPU_ID=1
+python train.py --config conf/linear_regression.yaml
+model:
+    family: gpt2
+    n_embd: 256  # useless if flag_read_in == False
+    n_layer: 1
+    n_head: 8  # should be a factor of 6 if flag_read_in == False
+    flag_read_in: True
+    activation_function: gelu_new # linear gelu_new
+    sigma: 1
+    flag_load_w_b: False
+---------------------------------------------------------------
+Wed Jan 17 02:53:33 PM EST 2024
+297
+GPU_ID=1
+python train.py --config conf/linear_regression.yaml
+model:
+    family: gpt2
+    n_embd: 256  # useless if flag_read_in == False
+    n_layer: 1
+    n_head: 16  # should be a factor of 6 if flag_read_in == False
+    flag_read_in: True
+    activation_function: gelu_new # linear gelu_new
+    sigma: 1
+    flag_load_w_b: False
+---------------------------------------------------------------
+Wed Jan 17 02:53:42 PM EST 2024
+298
+GPU_ID=1
+python train.py --config conf/linear_regression.yaml
+model:
+    family: gpt2
+    n_embd: 256  # useless if flag_read_in == False
+    n_layer: 1
+    n_head: 64  # should be a factor of 6 if flag_read_in == False
+    flag_read_in: True
+    activation_function: gelu_new # linear gelu_new
+    sigma: 1
+    flag_load_w_b: False
+---------------------------------------------------------------
+Wed Jan 17 02:53:50 PM EST 2024
+299
+GPU_ID=1
+python train.py --config conf/linear_regression.yaml
+model:
+    family: gpt2
+    n_embd: 256  # useless if flag_read_in == False
+    n_layer: 1
+    n_head: 128  # should be a factor of 6 if flag_read_in == False
+    flag_read_in: True
+    activation_function: gelu_new # linear gelu_new
+    sigma: 1
+    flag_load_w_b: False
+---------------------------------------------------------------
+Wed Jan 17 02:53:58 PM EST 2024
+300
+GPU_ID=1
+python train.py --config conf/linear_regression.yaml
+model:
+    family: gpt2
+    n_embd: 256  # useless if flag_read_in == False
+    n_layer: 1
+    n_head: 256  # should be a factor of 6 if flag_read_in == False
+    flag_read_in: True
+    activation_function: gelu_new # linear gelu_new
+    sigma: 1
+    flag_load_w_b: False
+---------------------------------------------------------------

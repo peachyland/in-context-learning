@@ -3,7 +3,7 @@ echo $JOB_ID
 NEXT_JOB_ID=`expr $JOB_ID + 1`
 echo $NEXT_JOB_ID > job_id.log
 
-GPU_ID='7'
+GPU_ID='1'
 MY_CMD="python train.py --config conf/linear_regression.yaml"
 MY_ROOT_PATH=`pwd`
 

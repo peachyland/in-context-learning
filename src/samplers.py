@@ -103,8 +103,11 @@ class GaussianSampler(DataSampler):
 #         Lambda = torch.load("correlated_lambda.pt")
 #         # Scaling factor c
 #         c = 1
+#         c_corr = 0.1
+#         # print(Lambda)
+#         # import pdb ; pdb.set_trace()
 #         # Covariance matrix is c * Lambda
-#         covariance_matrix = c * Lambda
+#         covariance_matrix = c * Lambda + c_corr * torch.ones(Lambda.shape)
 #         self.lambda_diag_dis = torch.distributions.MultivariateNormal(torch.zeros(dimension), covariance_matrix)
 
 #         print("####################################")
